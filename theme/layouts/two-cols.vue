@@ -19,20 +19,20 @@
 .gp-two-cols {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   height: 100%;
-  padding: 2.5rem 3rem;
+  padding: 3rem 4rem;
 }
 
 .gp-cols-header {
   position: relative;
   z-index: 1;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .gp-cols-container {
   display: flex;
-  flex: 1;
-  gap: 2rem;
+  gap: 2.5rem;
   position: relative;
   z-index: 1;
 }

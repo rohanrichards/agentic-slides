@@ -20,10 +20,17 @@
   max-width: 85%;
 }
 
-.gp-quote :deep(blockquote),
-.gp-quote :deep(p:first-child) {
-  font-size: 1.75rem;
-  line-height: 1.6;
+/* Reset base blockquote border — quote layout handles its own */
+.gp-quote :deep(blockquote) {
+  border-left: none;
+  padding-left: 0;
+  font-style: normal;
+  color: inherit;
+}
+
+.gp-quote :deep(blockquote p) {
+  font-size: 2rem;
+  line-height: 1.5;
   font-style: italic;
   color: var(--gp-text);
   border-left: 4px solid var(--gp-accent);
@@ -31,12 +38,15 @@
   animation: gp-fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.gp-quote :deep(p:last-child) {
+/* Attribution line (the paragraph after the blockquote) */
+.gp-quote :deep(blockquote + p),
+.gp-quote :deep(p:last-child:not(:first-child)) {
   color: var(--gp-text-muted);
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-style: normal;
   margin-top: 1.5rem;
   padding-left: 1.5rem;
+  border-left: none;
   animation: gp-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
 }
 </style>

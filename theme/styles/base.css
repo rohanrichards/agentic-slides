@@ -27,24 +27,36 @@
 .slidev-layout h1 {
   color: var(--gp-text);
   font-weight: 700;
+  font-size: 2.5rem;
   letter-spacing: -0.03em;
   line-height: 1.1;
+  margin-bottom: 1rem;
 }
 
 .slidev-layout h2 {
   color: var(--gp-text);
   font-weight: 600;
+  font-size: 2rem;
   letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
 }
 
 .slidev-layout h3 {
   color: var(--gp-text-muted);
   font-weight: 500;
+  font-size: 1.5rem;
 }
 
 .slidev-layout h1 + p {
   color: var(--gp-text-muted);
+  font-size: 1.15rem;
   margin-top: -0.5rem;
+}
+
+/* List styling */
+.slidev-layout ul, .slidev-layout ol {
+  font-size: 1.1rem;
+  line-height: 1.8;
 }
 
 /* Links */

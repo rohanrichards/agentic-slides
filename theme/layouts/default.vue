@@ -10,12 +10,12 @@
 .gp-default {
   display: flex;
   flex-direction: column;
-  padding: 2.5rem 3rem;
+  justify-content: center;
+  padding: 3rem 4rem;
   height: 100%;
 }
 
 .gp-content {
-  flex: 1;
   position: relative;
   z-index: 1;
 }
