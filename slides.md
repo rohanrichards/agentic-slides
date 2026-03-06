@@ -1,11 +1,8 @@
 ---
-theme: seriph
+theme: ./theme
 title: Agentic Coding
 info: |
-  A talk on agentic coding best practices
-class: text-center
-drawings:
-  persist: false
+  Best practices for working with AI coding agents
 transition: slide-left
 mdc: true
 ---
@@ -14,15 +11,6 @@ mdc: true
 
 Best practices for working with AI coding agents
 
-<div class="abs-br m-6 flex gap-2">
-  <a href="https://github.com/rohanrichards/agentic-slides" target="_blank" alt="GitHub" title="Open in GitHub"
-    class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon-logo-github />
-  </a>
-</div>
-
----
-transition: fade-out
 ---
 
 # What is Agentic Coding?
@@ -35,25 +23,120 @@ Using AI agents as collaborative coding partners
 - Tool use and environment interaction
 
 ---
+layout: section
+---
 
-# Why It Matters
+# The Principles
 
-The shift from autocomplete to autonomous agents
+---
+layout: two-cols
+---
+
+# Human + AI
+
+::left::
+
+**What humans do best:**
+- Define the problem
+- Set constraints
+- Review and validate
+- Make judgment calls
+
+::right::
+
+**What agents do best:**
+- Search large codebases
+- Apply patterns consistently
+- Run tests iteratively
+- Handle boilerplate
+
+---
+
+# The Workflow
 
 <v-clicks>
 
-- From **suggestions** to **solutions**
-- From **line-level** to **system-level** thinking
-- From **reactive** to **proactive** assistance
-- From **typing faster** to **thinking better**
+- **Spec first** — Write what you want before how
+- **Small commits** — Each change is atomic and reviewable
+- **Test-driven** — Write failing tests, then implement
+- **Review everything** — Trust but verify agent output
 
 </v-clicks>
 
 ---
-layout: center
-class: text-center
+layout: code-focus
 ---
 
-# More slides coming soon
+## Example: Agent-Driven TDD
 
-Built with [Slidev](https://sli.dev) and Claude Code
+```typescript
+// Step 1: Agent writes the failing test
+describe('parseCommand', () => {
+  it('should extract action and target', () => {
+    const result = parseCommand('deploy api')
+    expect(result).toEqual({ action: 'deploy', target: 'api' })
+  })
+})
+
+// Step 2: Agent implements to pass
+function parseCommand(input: string) {
+  const [action, target] = input.split(' ')
+  return { action, target }
+}
+```
+
+---
+
+# Key Components
+
+<GlowCard>
+
+**Context is everything.** The agent's output quality is directly proportional to the context you provide. Good specs, clear constraints, and relevant examples make the difference between mediocre and exceptional results.
+
+</GlowCard>
+
+---
+
+# Live Demo
+
+<TerminalBlock title="claude-code">
+
+$ claude "add user authentication to the API"
+
+⠋ Reading codebase...
+✓ Found 12 relevant files
+⠋ Writing auth middleware...
+✓ Created src/middleware/auth.ts
+✓ Added 8 tests, all passing
+✓ Committed: feat(auth): add JWT middleware
+
+</TerminalBlock>
+
+---
+
+<AnimatedCode code="const agent = new ClaudeAgent({
+  model: 'claude-sonnet-4-20250514',
+  tools: ['read', 'write', 'bash'],
+  maxTokens: 4096,
+})
+
+const result = await agent.run({
+  task: 'Fix the failing test in auth.spec.ts',
+  context: await loadRelevantFiles(),
+})" />
+
+---
+layout: quote
+---
+
+> The best code is the code you don't have to write yourself — but you do have to understand.
+
+— Every senior engineer, eventually
+
+---
+layout: section
+---
+
+# Questions?
+
+Built with Slidev + Geekpunk theme
