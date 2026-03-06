@@ -1,0 +1,117 @@
+:root {
+  --gp-bg: #0d1117;
+  --gp-bg-surface: #161b22;
+  --gp-bg-elevated: #1c2128;
+  --gp-text: #e6edf3;
+  --gp-text-muted: #8b949e;
+  --gp-accent: #00d4ff;
+  --gp-accent-secondary: #7c3aed;
+  --gp-accent-glow: rgba(0, 212, 255, 0.15);
+  --gp-border: rgba(139, 148, 158, 0.2);
+  --gp-code-bg: rgba(0, 212, 255, 0.05);
+  --gp-radius: 8px;
+
+  --slidev-theme-primary: var(--gp-accent);
+}
+
+/* Base slide styling */
+.slidev-layout {
+  background: var(--gp-bg);
+  color: var(--gp-text);
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Typography */
+.slidev-layout h1 {
+  color: var(--gp-text);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.slidev-layout h2 {
+  color: var(--gp-text);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.slidev-layout h3 {
+  color: var(--gp-text-muted);
+  font-weight: 500;
+}
+
+.slidev-layout h1 + p {
+  color: var(--gp-text-muted);
+  margin-top: -0.5rem;
+}
+
+/* Links */
+.slidev-layout a {
+  color: var(--gp-accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+  transition: border-color 0.2s ease;
+}
+
+.slidev-layout a:hover {
+  border-color: var(--gp-accent);
+}
+
+/* Code blocks */
+.slidev-layout pre {
+  background: var(--gp-bg-surface) !important;
+  border: 1px solid var(--gp-border);
+  border-left: 3px solid var(--gp-accent);
+  border-radius: var(--gp-radius);
+  padding: 1.25rem !important;
+}
+
+.slidev-layout :not(pre) > code {
+  background: var(--gp-code-bg);
+  color: var(--gp-accent);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Lists */
+.slidev-layout ul > li::marker {
+  color: var(--gp-accent);
+}
+
+.slidev-layout ol > li::marker {
+  color: var(--gp-accent);
+  font-weight: 600;
+}
+
+/* Blockquotes */
+.slidev-layout blockquote {
+  border-left: 3px solid var(--gp-accent);
+  padding-left: 1rem;
+  color: var(--gp-text-muted);
+  font-style: italic;
+}
+
+/* Strong/emphasis */
+.slidev-layout strong {
+  color: var(--gp-text);
+  font-weight: 600;
+}
+
+/* Horizontal rule */
+.slidev-layout hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gp-accent), var(--gp-accent-secondary), transparent);
+  margin: 2rem 0;
+}
+
+/* Slide number */
+.slidev-page-number {
+  color: var(--gp-text-muted) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.75rem !important;
+}
