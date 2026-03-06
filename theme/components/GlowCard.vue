@@ -10,10 +10,10 @@
 .gp-glow-card {
   position: relative;
   border-radius: var(--gp-radius);
-  padding: 1px;
+  padding: 2px;
   background: linear-gradient(135deg, var(--gp-accent), var(--gp-accent-secondary), var(--gp-accent));
-  background-size: 200% 200%;
-  animation: gp-glow-rotate 4s ease-in-out infinite;
+  background-size: 300% 300%;
+  animation: gp-glow-rotate 6s ease-in-out infinite;
 }
 
 @keyframes gp-glow-rotate {
@@ -24,18 +24,20 @@
 .gp-glow-card::before {
   content: '';
   position: absolute;
-  inset: 0;
-  border-radius: var(--gp-radius);
+  inset: -2px;
+  border-radius: calc(var(--gp-radius) + 2px);
   background: inherit;
-  filter: blur(12px);
-  opacity: 0.4;
+  filter: blur(20px);
+  opacity: 0.5;
   z-index: -1;
 }
 
 .gp-glow-card-inner {
   background: var(--gp-bg-surface);
-  border-radius: calc(var(--gp-radius) - 1px);
-  padding: 1.5rem;
+  border-radius: calc(var(--gp-radius) - 2px);
+  padding: 2rem 2.5rem;
   backdrop-filter: blur(10px);
+  font-size: 1.15rem;
+  line-height: 1.7;
 }
 </style>

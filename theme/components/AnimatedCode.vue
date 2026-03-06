@@ -1,19 +1,28 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { useIsSlideActive } from '@slidev/client'
 
 const props = defineProps({
   code: { type: String, required: true },
-  speed: { type: Number, default: 30 },
-  delay: { type: Number, default: 500 },
+  speed: { type: Number, default: 25 },
+  delay: { type: Number, default: 400 },
 })
 
+const isActive = useIsSlideActive()
 const displayed = ref('')
 const showCursor = ref(true)
+let timeout = null
+let interval = null
 
-onMounted(() => {
-  setTimeout(() => {
+function startAnimation() {
+  displayed.value = ''
+  showCursor.value = true
+  clearTimeout(timeout)
+  clearInterval(interval)
+
+  timeout = setTimeout(() => {
     let i = 0
-    const interval = setInterval(() => {
+    interval = setInterval(() => {
       if (i < props.code.length) {
         displayed.value += props.code[i]
         i++
@@ -23,6 +32,19 @@ onMounted(() => {
       }
     }, props.speed)
   }, props.delay)
+}
+
+watch(isActive, (active) => {
+  if (active) startAnimation()
+})
+
+onMounted(() => {
+  if (isActive.value) startAnimation()
+})
+
+onUnmounted(() => {
+  clearTimeout(timeout)
+  clearInterval(interval)
 })
 </script>
 
@@ -33,22 +55,29 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.gp-animated-code {
+  animation: gp-fade-up 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 .gp-animated-code pre {
   background: var(--gp-bg-surface) !important;
   border: 1px solid var(--gp-border) !important;
   border-left: 3px solid var(--gp-accent) !important;
   border-radius: var(--gp-radius);
-  padding: 1.25rem !important;
+  padding: 1.5rem !important;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--gp-text);
   animation: none !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 212, 255, 0.05);
+  min-height: 200px;
 }
 
 .gp-cursor {
   color: var(--gp-accent);
-  animation: gp-blink 0.8s step-end infinite;
+  animation: gp-blink 0.7s step-end infinite;
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
 }
 
 @keyframes gp-blink {
