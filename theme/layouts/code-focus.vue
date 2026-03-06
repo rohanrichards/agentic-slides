@@ -1,5 +1,5 @@
 <template>
-  <div class="slidev-layout gp-code-focus gp-mesh-bg">
+  <div class="slidev-layout gp-code-focus">
     <div class="gp-code-content">
       <slot />
     </div>
@@ -12,7 +12,7 @@
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  padding: 2rem 3rem;
+  padding: 2.5rem 4rem;
 }
 
 .gp-code-content {
@@ -21,14 +21,15 @@
 }
 
 .gp-code-focus :deep(pre) {
-  font-size: 1rem;
-  max-height: 80vh;
+  font-size: 0.95rem;
+  max-height: 75vh;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 212, 255, 0.05);
 }
 
 .gp-code-focus :deep(h1),
 .gp-code-focus :deep(h2),
 .gp-code-focus :deep(h3) {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 1.75rem;
 }
 </style>

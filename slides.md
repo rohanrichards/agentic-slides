@@ -116,6 +116,8 @@ $ claude "add user authentication to the API"
 
 ---
 
+# The Agent SDK
+
 <AnimatedCode :code="`const agent = new ClaudeAgent({\n  model: 'claude-sonnet-4-20250514',\n  tools: ['read', 'write', 'bash'],\n  maxTokens: 4096,\n})\n\nconst result = await agent.run({\n  task: 'Fix the failing test in auth.spec.ts',\n  context: await loadRelevantFiles(),\n})`" />
 
 ---
