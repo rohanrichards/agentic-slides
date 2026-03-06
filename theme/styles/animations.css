@@ -1,0 +1,169 @@
+/* === Gradient Mesh Background === */
+@keyframes gp-mesh-drift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 100%;
+  }
+}
+
+.gp-mesh-bg::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 80%, rgba(0, 212, 255, 0.04) 0%, transparent 50%);
+  background-size: 200% 200%;
+  animation: gp-mesh-drift 20s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gp-mesh-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* === Grid Overlay (subtle) === */
+.gp-grid-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(139, 148, 158, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 148, 158, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* === v-click animation overrides === */
+.slidev-vclick-target {
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.slidev-vclick-hidden {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.slidev-vclick-current,
+.slidev-vclick-prior {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slidev-vclick-prior {
+  opacity: 0.7;
+}
+
+/* === Headline reveal === */
+@keyframes gp-headline-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.gp-headline-reveal {
+  animation: gp-headline-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* === Underline draw === */
+@keyframes gp-underline-draw {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.gp-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.gp-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gp-accent), var(--gp-accent-secondary));
+  animation: gp-underline-draw 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+/* === Fade up for general elements === */
+@keyframes gp-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gp-fade-up {
+  animation: gp-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* === Code block glow on enter === */
+@keyframes gp-code-glow {
+  0% {
+    border-color: var(--gp-border);
+    box-shadow: none;
+  }
+  50% {
+    border-color: var(--gp-accent);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+  }
+  100% {
+    border-color: var(--gp-border);
+    box-shadow: none;
+  }
+}
+
+.slidev-layout pre {
+  animation: gp-code-glow 2s ease 0.3s both;
+}
+
+/* === Gradient text utility === */
+.gp-gradient-text {
+  background: linear-gradient(135deg, var(--gp-accent), var(--gp-accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === Slide transition overrides === */
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.slide-left-enter-from {
+  opacity: 0;
+  transform: translateX(40px) scale(0.98);
+}
+
+.slide-left-leave-to {
+  opacity: 0;
+  transform: translateX(-40px) scale(0.98);
+}
