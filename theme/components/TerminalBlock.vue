@@ -69,13 +69,23 @@ defineProps({
   padding: 1.25rem;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.9rem;
-  line-height: 1.6;
+  line-height: 1.8;
   color: var(--gp-text);
+  white-space: pre-wrap;
+}
+
+.gp-terminal-body :deep(p) {
+  white-space: pre-wrap;
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.8;
 }
 
 .gp-terminal-body :deep(pre) {
   background: none !important;
   border: none !important;
+  border-left: none !important;
   padding: 0 !important;
   margin: 0;
   animation: none !important;

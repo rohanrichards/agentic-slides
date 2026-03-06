@@ -101,6 +101,7 @@ function parseCommand(input: string) {
 
 <TerminalBlock title="claude-code">
 
+```
 $ claude "add user authentication to the API"
 
 ⠋ Reading codebase...
@@ -109,6 +110,7 @@ $ claude "add user authentication to the API"
 ✓ Created src/middleware/auth.ts
 ✓ Added 8 tests, all passing
 ✓ Committed: feat(auth): add JWT middleware
+```
 
 </TerminalBlock>
 
