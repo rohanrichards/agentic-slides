@@ -114,16 +114,7 @@ $ claude "add user authentication to the API"
 
 ---
 
-<AnimatedCode code="const agent = new ClaudeAgent({
-  model: 'claude-sonnet-4-20250514',
-  tools: ['read', 'write', 'bash'],
-  maxTokens: 4096,
-})
-
-const result = await agent.run({
-  task: 'Fix the failing test in auth.spec.ts',
-  context: await loadRelevantFiles(),
-})" />
+<AnimatedCode :code="`const agent = new ClaudeAgent({\n  model: 'claude-sonnet-4-20250514',\n  tools: ['read', 'write', 'bash'],\n  maxTokens: 4096,\n})\n\nconst result = await agent.run({\n  task: 'Fix the failing test in auth.spec.ts',\n  context: await loadRelevantFiles(),\n})`" />
 
 ---
 layout: quote
