@@ -115,13 +115,32 @@ The things I wish I knew on day one
 
 # Essential Commands
 
-<!-- TODO:
-  - /init — generates starter CLAUDE.md, what it does and why to run it first
-  - Plan mode (Shift+Tab twice) — read-only research and planning, start here for non-trivial tasks
-  - /clear — flush context between unrelated tasks (context contamination is real)
-  - /compact — compress conversation when context grows
-  - @ — reference files directly in prompts
-  - Subagents — isolated sub-sessions for investigation, keeps main context clean -->
+<v-clicks>
+
+- **`/init`** — analyzes your codebase, generates a starter CLAUDE.md. Run it first
+- **Plan mode** (`Shift+Tab` twice) — read-only research and planning. Start here for non-trivial tasks
+- **`/clear`** — flush context between unrelated tasks. "The single most underused command"
+- **`/compact`** — compress conversation when context grows. Add focus: `/compact Focus on the API changes`
+- **`@`** — reference files directly in prompts. `@src/auth.ts` beats describing where code lives
+- **Subagents** — isolated sub-sessions for investigation. Keeps your main context clean
+
+</v-clicks>
+
+---
+
+# Plan Mode
+
+<TerminalBlock title="Shift+Tab cycles through modes">
+
+```
+Normal Mode      →  you approve each action
+Auto-Accept Mode →  agent runs autonomously
+Plan Mode        →  read-only, no changes allowed
+```
+
+</TerminalBlock>
+
+Start most sessions in **Plan Mode**. Iterate on the plan. Then switch to Normal or Auto-Accept to execute.
 
 ---
 
@@ -129,11 +148,17 @@ The things I wish I knew on day one
 
 Give Claude a way to verify its work.
 
-<!-- TODO:
-  - Anthropic internal data: verification feedback loop = 2-3x quality improvement
-  - Instead of "implement email validation" → "write validateEmail, here are test cases, run them after implementing"
-  - Tests, run commands, check output — the more ways it can see its own work, the better
-  - This is the thing that separates good results from bad across ALL sources -->
+Anthropic internal data: a verification feedback loop produces **2-3x quality improvement**.
+
+<v-clicks>
+
+- This appeared in **every source** we researched — it's consensus #1
+- Don't say "implement email validation"
+- Say "write `validateEmail`. Test cases: `user@example.com` → true, `invalid` → false, `user@.com` → false. **Run the tests after implementing.**"
+- Tests, bash commands, screenshots — the more ways it can **see its own work**, the better
+- Without verification, "the tests pass" is a **prediction**, not a report
+
+</v-clicks>
 
 ---
 layout: section
