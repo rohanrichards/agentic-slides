@@ -92,13 +92,16 @@ layout: section
 
 # Why Claude Code
 
-<!-- TODO:
-  - Opus 4.6 on subscription — best model available, best value vs API pricing (all other providers use API pricing)
-  - Terminal version leads IDE in features — IDE integrations are lagging behind
-  - Not the desktop app — lacks skills, hooks, CLI power
-  - Open source — can read its own source code, use the agent to learn the agent
-  - Developing at lightning speed — new features constantly
-  - Honest about gaps: needs GitHub for Cloud, IDE integration lagging -->
+<v-clicks>
+
+- **Opus 4.6 on subscription** — best model available, best value. Every other provider charges API pricing
+- **Terminal version leads IDE** in features — IDE integrations are always lagging behind
+- **Not the desktop app** — desktop Claude lacks skills, hooks, CLI power, and subagents
+- **Open source** — you can read its source code. Use the agent to learn the agent's tooling
+- **Developing at lightning speed** — major features shipping monthly
+- Honest about gaps: Cloud needs GitHub, IDE integration still catching up
+
+</v-clicks>
 
 ---
 layout: section
