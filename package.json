@@ -5,7 +5,12 @@
   "private": true,
   "scripts": {
     "dev": "slidev --open",
+    "dev:talk1": "slidev talk1.md --open",
+    "dev:talk2": "slidev talk2.md --open",
+    "dev:talk3": "slidev talk3.md --open",
+    "dev:talk4": "slidev talk4.md --open",
     "build": "slidev build",
+    "build:all": "slidev build talk1.md talk2.md talk3.md talk4.md",
     "export": "slidev export"
   },
   "repository": {
