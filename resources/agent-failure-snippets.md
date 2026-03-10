@@ -1,13 +1,64 @@
 # Agent Failure Snippets
 
-Real examples of agents getting things wrong. Each entry is annotated with the pattern it demonstrates and what went wrong. Collected for use as slide examples in the talk series.
+Real examples of AI coding agents getting things wrong. Collected for the **Agentic Coding Best Practices** talk series — these become slide examples that show the audience what failure looks like in practice.
 
-## How to add entries
+## Why we collect these
 
-Paste the raw transcript under a new `### Snippet N` heading. Add:
-- **Pattern:** which named flaw this demonstrates
-- **What went wrong:** 1-2 sentence summary
-- **Talk:** which talk this could fit into
+The talk series covers common agent failure patterns (over-engineering, assumption cascading, confidence spirals, etc). Real examples are more compelling than fabricated ones. When you catch your agent doing something dumb, save it here.
+
+## How to add an entry
+
+**Option 1: Paste it raw and let someone annotate later**
+
+Just paste the transcript at the bottom of this file under a new heading. Don't worry about formatting or analysis — someone will annotate it later. Include enough context that a reader unfamiliar with your project can understand what happened.
+
+**Option 2: Paste it and ask your agent to annotate it**
+
+Copy this prompt and give it to your agent along with the transcript:
+
+> Read `resources/agent-failure-snippets.md` and add a new snippet entry following the existing format. Here's the transcript: [paste transcript]. Add the annotation fields (Pattern, What went wrong, Talk, Key moment, What good looks like) and wrap the full transcript in a details/summary block.
+
+**Option 3: Full manual entry**
+
+Create a new `### Snippet N` heading with these fields:
+
+```markdown
+### Snippet N: [short title describing the failure]
+
+**Pattern:** [which flaw — see pattern list below]
+**What went wrong:** [1-2 sentence summary]
+**Talk:** [which talk this fits — Talk 1/2/3/4 or "unsure"]
+
+**Key moment:** [the specific line or action where things went wrong]
+
+**What good looks like:** [what the agent should have done instead]
+
+**The user's reaction:** [if there's a good quote from the human]
+
+<details>
+<summary>Full transcript</summary>
+
+[paste the raw transcript here inside a code block]
+
+</details>
+```
+
+## Pattern reference
+
+These are the named failure patterns from our research. Use these labels in the **Pattern** field:
+
+| Pattern | What it looks like |
+|---------|-------------------|
+| **Assumption cascading** | Fills gaps with guesses, builds on those guesses without checking |
+| **Sycophancy** | Agrees with everything, won't push back or surface alternatives |
+| **Over-engineering** | Class hierarchies, wrapper classes, config options nobody asked for |
+| **Unverified claims** | "The tests pass" without running them. Asserts outcomes without evidence |
+| **Cheats on tests** | Writes tests that conform to buggy code, assertion-free tests, lowers thresholds |
+| **Confidence spiral** | Gets it wrong, tries again with more confidence, never understands the system |
+| **Dead code accumulation** | Doesn't clean up after itself. Old implementations linger |
+| **Subtle conceptual errors** | Not syntax bugs — quietly wrong decisions, wrong data structure, missed edge cases |
+
+Multiple patterns can apply to one snippet — just list them all.
 
 ---
 
