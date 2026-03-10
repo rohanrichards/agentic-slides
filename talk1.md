@@ -37,6 +37,56 @@ Not autocomplete. An autonomous tool that reads your codebase, writes code, runs
 
 ---
 
+# How It Works
+
+<div style="display: flex; gap: 2rem; align-items: stretch; margin-top: 1rem;">
+  <div style="flex: 1.3; border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 10px; padding: 1.25rem; background: rgba(0, 212, 255, 0.05);">
+    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #00d4ff; margin-bottom: 1rem;">Your Machine</div>
+    <div style="background: #161b22; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.75rem; border-left: 3px solid #00d4ff;">
+      <div style="font-size: 0.85rem; font-weight: 600; color: #e6edf3;">Context Window</div>
+      <div style="font-size: 0.7rem; color: #8b949e; line-height: 1.6; margin-top: 0.25rem;">System prompt · CLAUDE.md · Conversation · Tool results</div>
+    </div>
+    <div style="background: #161b22; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.75rem; border-left: 3px solid #7c3aed;">
+      <div style="font-size: 0.85rem; font-weight: 600; color: #e6edf3;">Tools</div>
+      <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.35rem;">
+        <span style="font-size: 0.65rem; background: rgba(124, 58, 237, 0.15); color: #a78bfa; padding: 0.15rem 0.5rem; border-radius: 4px;">Read</span>
+        <span style="font-size: 0.65rem; background: rgba(124, 58, 237, 0.15); color: #a78bfa; padding: 0.15rem 0.5rem; border-radius: 4px;">Edit</span>
+        <span style="font-size: 0.65rem; background: rgba(124, 58, 237, 0.15); color: #a78bfa; padding: 0.15rem 0.5rem; border-radius: 4px;">Bash</span>
+        <span style="font-size: 0.65rem; background: rgba(124, 58, 237, 0.15); color: #a78bfa; padding: 0.15rem 0.5rem; border-radius: 4px;">Grep</span>
+        <span style="font-size: 0.65rem; background: rgba(124, 58, 237, 0.15); color: #a78bfa; padding: 0.15rem 0.5rem; border-radius: 4px;">Glob</span>
+        <span style="font-size: 0.65rem; background: rgba(124, 58, 237, 0.15); color: #a78bfa; padding: 0.15rem 0.5rem; border-radius: 4px;">Subagent</span>
+      </div>
+    </div>
+    <div style="font-size: 0.7rem; color: #8b949e; line-height: 1.5;">Runs the loop · Executes tools · Manages context</div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; justify-content: center; gap: 0.5rem; flex-shrink: 0;">
+    <div style="text-align: center;">
+      <div style="font-size: 0.65rem; color: #8b949e;">full context</div>
+      <div style="color: #00d4ff; font-size: 1.5rem;">→</div>
+    </div>
+    <div style="text-align: center;">
+      <div style="color: #7c3aed; font-size: 1.5rem;">←</div>
+      <div style="font-size: 0.65rem; color: #8b949e;">tool call or reply</div>
+    </div>
+  </div>
+
+  <div style="flex: 1; border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 10px; padding: 1.25rem; background: rgba(124, 58, 237, 0.05);">
+    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #7c3aed; margin-bottom: 1rem;">Anthropic API</div>
+    <div style="background: #161b22; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.75rem; border-left: 3px solid #7c3aed;">
+      <div style="font-size: 0.85rem; font-weight: 600; color: #e6edf3;">LLM Thinks</div>
+      <div style="font-size: 0.7rem; color: #8b949e; line-height: 1.6; margin-top: 0.25rem;">Reads the full context.<br/>Decides: respond or call a tool?</div>
+    </div>
+    <div style="background: #161b22; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.75rem; border-left: 3px solid #7c3aed;">
+      <div style="font-size: 0.85rem; font-weight: 600; color: #e6edf3;">Returns</div>
+      <div style="font-size: 0.7rem; color: #8b949e; line-height: 1.6; margin-top: 0.25rem;"><code style="color: #a78bfa; font-size: 0.65rem;">"call Bash: npm test"</code><br/><em>or</em> a text response to you</div>
+    </div>
+    <div style="font-size: 0.7rem; color: #8b949e; line-height: 1.5;"><strong style="color: #e6edf3;">Stateless.</strong> No memory between calls.</div>
+  </div>
+</div>
+
+---
+
 # The Context Window
 
 Everything the agent knows lives in one context window. Here's what fills it:
@@ -53,32 +103,108 @@ Everything the agent knows lives in one context window. Here's what fills it:
 
 ---
 
+# What That Looks Like
+
+<div style="display: flex; gap: 2rem; align-items: center; margin-top: 0.5rem;">
+  <div style="flex: 1;">
+    <img src="/context-usage.png" style="border-radius: 10px; border: 1px solid rgba(139, 148, 158, 0.2); width: 100%;" />
+    <div style="font-size: 0.65rem; color: #8b949e; margin-top: 0.4rem;"><code>/context</code> — real-time usage breakdown</div>
+  </div>
+
+  <div style="flex: 1.1;">
+    <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #8b949e; margin-bottom: 0.5rem;">Where it comes from</div>
+    <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div style="width: 8px; height: 8px; border-radius: 2px; background: #8b949e; flex-shrink: 0;"></div>
+        <div style="font-size: 0.7rem; color: #8b949e;">System prompt</div>
+        <div style="flex: 1; border-bottom: 1px dashed rgba(139,148,158,0.2);"></div>
+        <div style="font-size: 0.6rem; color: #8b949e;">Built-in</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div style="width: 8px; height: 8px; border-radius: 2px; background: #8b949e; flex-shrink: 0;"></div>
+        <div style="font-size: 0.7rem; color: #8b949e;">System tools</div>
+        <div style="flex: 1; border-bottom: 1px dashed rgba(139,148,158,0.2);"></div>
+        <div style="font-size: 0.6rem; color: #8b949e;">Built-in</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div style="width: 8px; height: 8px; border-radius: 2px; background: #e65100; flex-shrink: 0;"></div>
+        <div style="font-size: 0.7rem; color: #e6edf3;">Memory files</div>
+        <div style="flex: 1; border-bottom: 1px dashed rgba(139,148,158,0.2);"></div>
+        <div style="font-size: 0.6rem; color: #00d4ff;">~/.claude/CLAUDE.md</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div style="width: 8px; height: 8px; border-radius: 2px; background: #e65100; flex-shrink: 0;"></div>
+        <div style="font-size: 0.7rem; color: #e6edf3;">CLAUDE.md</div>
+        <div style="flex: 1; border-bottom: 1px dashed rgba(139,148,158,0.2);"></div>
+        <div style="font-size: 0.6rem; color: #00d4ff;">./CLAUDE.md</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div style="width: 8px; height: 8px; border-radius: 2px; background: #c62828; flex-shrink: 0;"></div>
+        <div style="font-size: 0.7rem; color: #e6edf3;">Skills</div>
+        <div style="flex: 1; border-bottom: 1px dashed rgba(139,148,158,0.2);"></div>
+        <div style="font-size: 0.6rem; color: #00d4ff;">.claude/skills/</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div style="width: 8px; height: 8px; border-radius: 2px; background: #7c3aed; flex-shrink: 0;"></div>
+        <div style="font-size: 0.7rem; color: #e6edf3;">Messages</div>
+        <div style="flex: 1; border-bottom: 1px dashed rgba(139,148,158,0.2);"></div>
+        <div style="font-size: 0.6rem; color: #8b949e;">Your conversation</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div style="width: 8px; height: 8px; border-radius: 2px; background: transparent; border: 1px solid #8b949e; flex-shrink: 0;"></div>
+        <div style="font-size: 0.7rem; color: #8b949e;">Free space</div>
+        <div style="flex: 1; border-bottom: 1px dashed rgba(139,148,158,0.2);"></div>
+        <div style="font-size: 0.6rem; color: #8b949e;">74% here</div>
+      </div>
+    </div>
+    <div style="margin-top: 0.6rem; padding: 0.4rem 0.6rem; background: rgba(124, 58, 237, 0.1); border-radius: 6px; border-left: 3px solid #7c3aed;">
+      <div style="font-size: 0.65rem; color: #a78bfa;">~26% consumed before you send a single message</div>
+    </div>
+  </div>
+</div>
+
+---
+
 # Where Things Live on Disk
 
-<v-clicks>
+<div style="display: flex; gap: 2rem; margin-top: 0.75rem;">
+  <div style="flex: 1; border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 10px; padding: 1rem 1.25rem; background: rgba(0, 212, 255, 0.05);">
+    <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #00d4ff; margin-bottom: 0.75rem;">~/.claude/ <span style="color: #8b949e; text-transform: none; letter-spacing: 0;">— your home directory</span></div>
+    <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #00d4ff; font-size: 0.7rem;">CLAUDE.md</code> — personal preferences, all projects</div>
+      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #00d4ff; font-size: 0.7rem;">settings.json</code> — global permission rules</div>
+      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #00d4ff; font-size: 0.7rem;">commands/</code> — your personal slash commands</div>
+      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #00d4ff; font-size: 0.7rem;">memory/</code> — auto-memory across sessions</div>
+    </div>
+    <div style="margin-top: 0.6rem; font-size: 0.65rem; color: #8b949e;">Just you. Not checked in. Follows you across projects.</div>
+  </div>
 
-- `~/.claude/CLAUDE.md` — your personal preferences (just you, all projects)
-- `./CLAUDE.md` — project root, checked into git (shared with team)
-- `.claude/settings.json` — permission rules, MCP configs
-- `.claude/commands/` — custom slash commands
-- Parent/child directories — monorepo support, loaded on demand
-
-</v-clicks>
+  <div style="flex: 1; border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 10px; padding: 1rem 1.25rem; background: rgba(124, 58, 237, 0.05);">
+    <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #7c3aed; margin-bottom: 0.75rem;">your-project/ <span style="color: #8b949e; text-transform: none; letter-spacing: 0;">— checked into git</span></div>
+    <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #a78bfa; font-size: 0.7rem;">CLAUDE.md</code> — team standards, shared context</div>
+      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #a78bfa; font-size: 0.7rem;">.claude/settings.json</code> — project permission rules</div>
+      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #a78bfa; font-size: 0.7rem;">.claude/commands/</code> — team slash commands</div>
+      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #a78bfa; font-size: 0.7rem;">CLAUDE.local.md</code> — personal overrides <span style="font-size: 0.65rem; color: #8b949e;">(gitignored)</span></div>
+    </div>
+    <div style="margin-top: 0.6rem; font-size: 0.65rem; color: #8b949e;">Shared with your team. Evolves with the codebase.</div>
+  </div>
+</div>
 
 ---
 
 # Not All Agents Are Equal
 
-The same model produces different quality in different harnesses.
+Same model, different wrapper, different results. Here's what actually varies:
 
 <v-clicks>
 
-- **Architecture is the variable**, not just the model — same model, different harness, different quality
-- Claude Code: one main loop, flat message list, no multi-agent orchestration
-- **Dedicated tools** for high-frequency actions — reduces decision complexity for the model
-- Self-managed context — compaction, subagents, todo lists
-- CLAUDE.md = human-editable persistent prompt that **survives compaction**
-- 50%+ of auxiliary calls go to faster/cheaper models — keeps costs down
+- **Tool design** — dedicated tools for file editing, search, etc. vs. piping everything through a shell
+- **Context management** — compaction, subagents, smart routing vs. filling the window until quality degrades
+- **Persistent context** — CLAUDE.md, memory files, rules that survive across sessions vs. starting blank every time
+- **Autonomy and self-correction** — can the agent see errors and retry, or is it one-shot?
+- **Extensibility** — skills, hooks, custom commands that encode your workflows vs. just a chat box
+- **Ecosystem** — MCP support, GitHub Actions, SDK access vs. closed and proprietary
 
 </v-clicks>
 
@@ -130,35 +256,66 @@ The things I wish I knew on day one
 
 # Plan Mode
 
-<TerminalBlock title="Shift+Tab cycles through modes">
+`Shift+Tab` cycles through three modes:
 
-```
-Normal Mode      →  you approve each action
-Auto-Accept Mode →  agent runs autonomously
-Plan Mode        →  read-only, no changes allowed
-```
+<div style="display: flex; gap: 1rem; margin-top: 1rem;">
+  <div style="flex: 1; border: 1px solid rgba(139, 148, 158, 0.2); border-radius: 10px; padding: 1rem; background: rgba(139, 148, 158, 0.05);">
+    <div style="font-size: 0.9rem; font-weight: 700; color: #e6edf3;">Normal</div>
+    <div style="font-size: 0.7rem; color: #8b949e; margin-top: 0.3rem;">You approve each action before it runs</div>
+  </div>
+  <div style="flex-shrink: 0; display: flex; align-items: center; color: #8b949e;">→</div>
+  <div style="flex: 1; border: 1px solid rgba(139, 148, 158, 0.2); border-radius: 10px; padding: 1rem; background: rgba(139, 148, 158, 0.05);">
+    <div style="font-size: 0.9rem; font-weight: 700; color: #e6edf3;">Auto-Accept</div>
+    <div style="font-size: 0.7rem; color: #8b949e; margin-top: 0.3rem;">Agent runs autonomously — you watch</div>
+  </div>
+  <div style="flex-shrink: 0; display: flex; align-items: center; color: #8b949e;">→</div>
+  <div style="flex: 1; border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 10px; padding: 1rem; background: rgba(0, 212, 255, 0.08);">
+    <div style="font-size: 0.9rem; font-weight: 700; color: #00d4ff;">Plan Mode</div>
+    <div style="font-size: 0.7rem; color: #8b949e; margin-top: 0.3rem;">Read-only. No changes. Thinking only.</div>
+  </div>
+</div>
 
-</TerminalBlock>
+<div style="margin-top: 1rem; font-size: 0.95rem;">Start most sessions in <strong style="color: #00d4ff;">Plan Mode</strong>. Iterate on the plan. Then switch to execute.</div>
 
-Start most sessions in **Plan Mode**. Iterate on the plan. Then switch to Normal or Auto-Accept to execute.
+---
+layout: section
+---
+
+# The #1 Tip
+
+The one thing every source agrees on
 
 ---
 
-# The Single Highest-Leverage Tip
+# Give Claude a Way to Verify Its Work
 
-Give Claude a way to verify its work.
+<div style="display: flex; gap: 2rem; margin-top: 0.5rem;">
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
+    <div style="font-size: 1rem; color: #e6edf3; line-height: 1.7;">Anthropic internal data: <strong>2-3x quality improvement</strong> with a verification loop.</div>
+    <div style="font-size: 0.9rem; color: #8b949e; line-height: 1.7;">Appeared in <strong style="color: #e6edf3;">every source</strong> we researched — consensus #1.</div>
+    <div style="font-size: 0.9rem; color: #8b949e; line-height: 1.7;">Without it, "the tests pass" is a <strong style="color: #e6edf3;">prediction</strong>, not a report.</div>
+    <div style="font-size: 0.9rem; color: #8b949e; line-height: 1.7;">Tests, bash commands, screenshots — the more ways it can <strong style="color: #e6edf3;">see its own work</strong>, the better.</div>
+  </div>
 
-Anthropic internal data: a verification feedback loop produces **2-3x quality improvement**.
-
-<v-clicks>
-
-- This appeared in **every source** we researched — it's consensus #1
-- Don't say "implement email validation"
-- Say "write `validateEmail`. Test cases: `user@example.com` → true, `invalid` → false, `user@.com` → false. **Run the tests after implementing.**"
-- Tests, bash commands, screenshots — the more ways it can **see its own work**, the better
-- Without verification, "the tests pass" is a **prediction**, not a report
-
-</v-clicks>
+  <div style="flex: 1;">
+    <div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: #8b949e; margin-bottom: 0.5rem;">The feedback loop in action:</div>
+    <div style="background: #161b22; border-radius: 8px; padding: 0.7rem 0.9rem; border-left: 3px solid #00d4ff; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; line-height: 1.8;">
+      <div style="color: #8b949e;">⠋ Writing tests...</div>
+      <div style="color: #e6edf3;">$ npm test</div>
+      <div style="color: #f87171;">✗ 3 failing</div>
+      <div style="color: #8b949e; margin-top: 0.3rem;">⠋ Implementing...</div>
+      <div style="color: #e6edf3;">$ npm test</div>
+      <div style="color: #4ade80;">✓ 3 passing</div>
+      <div style="color: #8b949e; margin-top: 0.3rem;">⠋ Checking the page...</div>
+      <div style="color: #e6edf3;">$ browser screenshot localhost:3000</div>
+      <div style="color: #e6edf3;">📸 Form renders, but submit button is</div>
+      <div style="color: #e6edf3;">   clipped below the fold</div>
+      <div style="color: #8b949e; margin-top: 0.3rem;">⠋ Fixing layout...</div>
+      <div style="color: #e6edf3;">$ browser screenshot localhost:3000</div>
+      <div style="color: #4ade80;">✓ Form visible, button accessible</div>
+    </div>
+  </div>
+</div>
 
 ---
 layout: section
