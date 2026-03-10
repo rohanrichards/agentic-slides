@@ -327,54 +327,84 @@ layout: section
 
 # CLAUDE.md
 
-A shared configuration file committed to your repository.
+Persistent instructions loaded into every session. Under 200 lines — this is premium context.
 
-<!-- TODO:
-  - Run /init to generate starter
-  - Prune ruthlessly — under 200 lines. For each line: "Would removing this cause mistakes?"
-  - Check it into git — this is team infrastructure, not personal config
-  - What goes in: build/test/lint commands, code style, architectural patterns, libraries to use/avoid
-  - What doesn't: personal preferences (those go in CLAUDE.local.md, gitignored), rules the linter enforces -->
+<div style="display: flex; gap: 1.5rem; margin-top: 0.75rem;">
+  <div style="flex: 1; border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 10px; padding: 0.9rem 1.1rem; background: rgba(0, 212, 255, 0.05);">
+    <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #4ade80; margin-bottom: 0.6rem;">What belongs</div>
+    <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.8rem; color: #e6edf3; line-height: 1.5;">
+      <div><strong>Corrections</strong> — things Claude gets wrong for your project</div>
+      <div><strong>Non-obvious conventions</strong> — "use pnpm not npm"</div>
+      <div><strong>Architectural decisions</strong> — prevents competing patterns</div>
+      <div><strong>Things to avoid</strong> — libraries, approaches that look right but aren't</div>
+      <div><strong>Pointers</strong> — <code style="font-size: 0.7rem;">@README.md</code>, <code style="font-size: 0.7rem;">@docs/architecture.md</code></div>
+    </div>
+  </div>
 
----
+  <div style="flex: 1; border: 1px solid rgba(139, 148, 158, 0.2); border-radius: 10px; padding: 0.9rem 1.1rem; background: rgba(139, 148, 158, 0.05);">
+    <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #f87171; margin-bottom: 0.6rem;">What doesn't</div>
+    <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.8rem; color: #8b949e; line-height: 1.5;">
+      <div>Build/test/lint commands in <code style="font-size: 0.7rem;">package.json</code></div>
+      <div>Standard language conventions Claude already knows</div>
+      <div>Rules your linter already enforces</div>
+      <div>Detailed API docs — link with <code style="font-size: 0.7rem;">@</code> instead</div>
+      <div>Personal preferences — use <code style="font-size: 0.7rem;">CLAUDE.local.md</code></div>
+    </div>
+  </div>
+</div>
 
-# Work On It As a Team
-
-<!-- TODO: Cherny's team practices:
-  - After every correction: "Update your CLAUDE.md so you don't make that mistake again"
-  - Tag coworkers' PRs with @.claude to add learnings
-  - Claude suggests CLAUDE.md improvements after sessions
-  - The correction → rule loop: institutional memory that compounds
-  - Commit CLAUDE.md updates alongside the code changes that prompted them -->
-
----
-
-# Permission Whitelist
-
-The agent runs shell commands by default. You decide which ones.
-
-<!-- TODO:
-  - Deny rules: .env, ~/.ssh/, credentials, secrets
-  - Approve explicitly: Deny > Allow > Ask
-  - Audit frequently — review as the project evolves
-  - Never run with --dangerously-skip-permissions outside containers
-  - This is your security baseline — set it up on day one, not after an incident -->
+<div style="margin-top: 0.6rem; padding: 0.4rem 0.7rem; background: rgba(124, 58, 237, 0.1); border-radius: 6px; border-left: 3px solid #7c3aed; font-size: 0.75rem; color: #a78bfa;">
+  For path-specific rules, use <code style="font-size: 0.65rem;">.claude/rules/</code> with <code style="font-size: 0.65rem;">paths</code> frontmatter — rules only load when Claude touches matching files
+</div>
 
 ---
 
-# Your First Hour Checklist
+# The Correction → Rule Loop
 
-<!-- TODO:
-  1. Install Claude Code
-  2. cd your-project && claude
-  3. Run /init
-  4. Prune CLAUDE.md to under 200 lines
-  5. Learn Shift+Tab (Normal → Auto-Accept → Plan Mode)
-  6. Run /permissions to configure your whitelist
-  7. Start in Plan Mode for your first real task
-  8. After each task: /clear
-  9. When Claude makes a mistake: correct it, then "Update your CLAUDE.md"
-  10. Always give Claude verification: "Run the tests after implementing" -->
+CLAUDE.md isn't written upfront. It's built through use.
+
+<v-clicks>
+
+- Claude makes a mistake → you correct it → **"Now update CLAUDE.md so you don't do that again"**
+- Claude is "eerily good" at writing rules for itself — let it draft the rule, you review it
+- Commit the CLAUDE.md update **alongside the code change** that prompted it
+- Over time, Claude's error rate **measurably drops** for your project
+- Your whole team benefits — check it into git, review CLAUDE.md changes in PRs like any other code
+- This is how the Anthropic team works on Claude Code itself
+
+</v-clicks>
+
+---
+
+# Permissions
+
+By default, Claude asks before every command. You'll build your allowlist naturally.
+
+<v-clicks>
+
+- Every permission dialogue offers **"yes, and always allow"** — your allowlist grows as you work
+- Be sensible about what you approve permanently — test runners and linters, yes. Arbitrary curl, maybe not
+- **Watch for wildcards**: `Bash(npm run *)` allows all npm scripts — that's probably fine. `Bash(ssh *)` allows all ssh commands — maybe not
+- **Audit periodically** — run `/permissions` to review what's accumulated
+- Store in `.claude/settings.json` and **check into git** — your team gets the same baseline
+
+</v-clicks>
+
+---
+
+# Your First Session
+
+<v-clicks>
+
+1. `cd your-project && claude`
+2. Run **`/init`** — generates your starter CLAUDE.md. Prune it
+3. Learn **`Shift+Tab`** — cycle to Plan Mode before your first real task
+4. When Claude asks to run a command you trust, **"yes, and always allow"**
+5. After each task: **`/clear`**. Context contamination is real
+6. When Claude makes a mistake: correct it, then **"update CLAUDE.md so you don't do that again"**
+7. Always include verification: **"run the tests after each step"**
+
+</v-clicks>
 
 ---
 
@@ -392,7 +422,14 @@ Your homework for the next two weeks:
 
 # Sources
 
-<!-- TODO: Sources table -->
+| Source | Key Insight |
+|--------|------------|
+| **Anthropic** | Verification = 2-3x quality (internal data) |
+| **Boris Cherny** | Correction → rule loop, CLAUDE.md as team infra |
+| **Andrej Karpathy** | Agent failure modes, generation vs discrimination |
+| **Simon Willison** | Context engineering, the lethal trifecta |
+| **Claude Code Docs** | Best practices, context management, plan mode |
+| **MinusX** | Architecture analysis — why the harness matters |
 
 ---
 layout: section
