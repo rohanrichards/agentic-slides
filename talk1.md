@@ -26,21 +26,44 @@ What's actually happening under the hood
 
 Not autocomplete. An autonomous tool that reads your codebase, writes code, runs commands, and iterates on the results.
 
-<!-- TODO: Infographic showing the layers of context:
-  System prompt → CLAUDE.md → Conversation history → Tool definitions → Available tools
-  Show where each lives on disk -->
+<v-clicks>
+
+- It has **tools** — file reads, edits, bash commands, web search, subagents
+- It calls those tools in a loop — act, observe, decide, act again
+- It manages its own context — decides what to read, what to compact, when to delegate
+- Left unsupervised, it will **confidently build the wrong thing**
+
+</v-clicks>
 
 ---
 
 # The Context Window
 
-<!-- TODO: Diagram/infographic showing what fills the context window and in what order:
-  - System prompt (built-in)
-  - CLAUDE.md (injected every session)
-  - Conversation (your prompts + responses)
-  - Tool calls and results
-  - File contents read by the agent
-  Show file paths: ~/.claude/, .claude/settings.json, CLAUDE.md hierarchy (root, parent dirs, user-level) -->
+Everything the agent knows lives in one context window. Here's what fills it:
+
+<v-clicks>
+
+- **System prompt** — built-in instructions from Anthropic (~2,800 tokens)
+- **Tool definitions** — every tool the agent can call (~9,400 tokens)
+- **CLAUDE.md** — your project rules, injected every session
+- **Conversation** — your prompts + its responses + tool calls + file contents
+- Performance **degrades as context fills** — Claude literally gets worse the more it's holding
+
+</v-clicks>
+
+---
+
+# Where Things Live on Disk
+
+<v-clicks>
+
+- `~/.claude/CLAUDE.md` — your personal preferences (just you, all projects)
+- `./CLAUDE.md` — project root, checked into git (shared with team)
+- `.claude/settings.json` — permission rules, MCP configs
+- `.claude/commands/` — custom slash commands
+- Parent/child directories — monorepo support, loaded on demand
+
+</v-clicks>
 
 ---
 
@@ -48,13 +71,16 @@ Not autocomplete. An autonomous tool that reads your codebase, writes code, runs
 
 The same model produces different quality in different harnesses.
 
-<!-- TODO: What makes Claude Code's architecture good:
-  - Simple main loop, flat message list
-  - Dedicated tools for high-frequency actions
-  - Self-managed context (compaction, subagents)
-  - CLAUDE.md = human-editable persistent prompt that survives compaction
-  - 50%+ of auxiliary calls go to faster/cheaper models
-  Why this matters: agent architecture is the variable, not just the model -->
+<v-clicks>
+
+- **Architecture is the variable**, not just the model — same model, different harness, different quality
+- Claude Code: one main loop, flat message list, no multi-agent orchestration
+- **Dedicated tools** for high-frequency actions — reduces decision complexity for the model
+- Self-managed context — compaction, subagents, todo lists
+- CLAUDE.md = human-editable persistent prompt that **survives compaction**
+- 50%+ of auxiliary calls go to faster/cheaper models — keeps costs down
+
+</v-clicks>
 
 ---
 layout: section
