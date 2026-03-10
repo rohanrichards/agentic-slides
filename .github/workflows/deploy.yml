@@ -1,0 +1,52 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build each talk
+        run: |
+          BASE=/agentic-slides
+          npx slidev build slides.md --base $BASE/ --out dist
+          npx slidev build talk1.md --base $BASE/talk1/ --out dist/talk1
+          npx slidev build talk2.md --base $BASE/talk2/ --out dist/talk2
+          npx slidev build talk3.md --base $BASE/talk3/ --out dist/talk3
+          npx slidev build talk4.md --base $BASE/talk4/ --out dist/talk4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
