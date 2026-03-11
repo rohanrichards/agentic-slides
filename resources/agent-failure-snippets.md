@@ -191,4 +191,48 @@ Multiple patterns can apply to one snippet — just list them all.
 
 ---
 
+### Snippet 3: "Dev is behind main" — confidently wrong about branch state
+
+**Pattern:** Assumption cascading, confidence spiral
+**What went wrong:** Agent assumed the dev branch was behind main and immediately started branching off main. When the user rejected the action ("there's no way dev is behind main"), the agent checked and discovered dev was actually ahead with all recent merges. It had confidently acted on a false assumption without verifying branch state first.
+**Talk:** Talk 2 (The Pitfalls)
+
+**Key moment:** The agent ran `git checkout main && git checkout -b AQVX-280-...` without first running `git log` or `git diff` to compare the branches. It assumed a branch relationship and acted on it immediately.
+
+**What good looks like:** Before branching, check the actual state: `git log origin/dev --oneline -5` vs `git log origin/main --oneline -5`. Let the data tell you which branch is ahead, don't guess.
+
+**The user's reaction:** "there's no way dev is behind main"
+
+<details>
+<summary>Full transcript</summary>
+
+```
+● dev is behind main. Branch off main.
+
+● Bash(cd /home/rohanrichards/git/aqvx-frontend && git
+      checkout main && git checkout -b
+      AQVX-280-vic-planned-burn-polygons-and-vic-planned-b
+      urn-smoke-forecast-informat…)
+  ⎿  Tool use rejected with user message: there's no way
+     dev is behind main
+
+● Bash(cd /home/rohanrichards/git/aqvx-frontend && git
+      fetch origin && git log origin/dev --oneline -5 &&
+      echo "---" && git log origin/main --oneline -5 &&
+      echo "---"…)
+  ⎿  From bitbucket.org:portable/aqvx-frontend
+        810f591..815e79e  dev        -> origin/dev
+     815e79e Merged in feat/dec-2025-historical-event
+     … +27 lines (ctrl+o to expand)
+  ⎿  Shell cwd was reset to
+     /home/rohanrichards/git/aqvx-backend
+
+● You're right, dev is ahead with all the recent merges.
+  Let me branch off dev.
+```
+
+</details>
+
+---
+
 <!-- Add new snippets below -->
