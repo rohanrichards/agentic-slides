@@ -60,15 +60,14 @@ Not autocomplete. An autonomous tool that reads your codebase, writes code, runs
     <div style="font-size: 0.7rem; color: #8b949e; line-height: 1.5;">Runs the loop · Executes tools · Manages context</div>
   </div>
 
-  <div style="display: flex; flex-direction: column; justify-content: center; gap: 0.5rem; flex-shrink: 0;">
-    <div style="text-align: center;">
-      <div style="font-size: 0.65rem; color: #8b949e;">full context</div>
-      <div style="color: #00d4ff; font-size: 1.5rem;">→</div>
+  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0.3rem; flex-shrink: 0; min-width: 5rem;">
+    <div style="font-size: 0.65rem; color: #8b949e;">full context</div>
+    <div style="color: #00d4ff; font-size: 1.5rem;">→</div>
+    <div style="border: 2px solid rgba(124, 58, 237, 0.4); border-radius: 50%; width: 3.5rem; height: 3.5rem; display: flex; align-items: center; justify-content: center; margin: 0.3rem 0;">
+      <div style="font-size: 0.55rem; font-weight: 700; color: #a78bfa; text-align: center; line-height: 1.2;">LOOP<br/>&#x21bb;</div>
     </div>
-    <div style="text-align: center;">
-      <div style="color: #7c3aed; font-size: 1.5rem;">←</div>
-      <div style="font-size: 0.65rem; color: #8b949e;">tool call or reply</div>
-    </div>
+    <div style="color: #7c3aed; font-size: 1.5rem;">←</div>
+    <div style="font-size: 0.65rem; color: #8b949e;">tool call or reply</div>
   </div>
 
   <div style="flex: 1; border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 10px; padding: 1.25rem; background: rgba(124, 58, 237, 0.05);">
@@ -167,27 +166,106 @@ Everything the agent knows lives in one context window. Here's what fills it:
 
 # Where Things Live on Disk
 
-<div style="display: flex; gap: 2rem; margin-top: 0.75rem;">
-  <div style="flex: 1; border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 10px; padding: 1rem 1.25rem; background: rgba(0, 212, 255, 0.05);">
-    <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #00d4ff; margin-bottom: 0.75rem;">~/.claude/ <span style="color: #8b949e; text-transform: none; letter-spacing: 0;">— your home directory</span></div>
-    <div style="display: flex; flex-direction: column; gap: 0.4rem;">
-      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #00d4ff; font-size: 0.7rem;">CLAUDE.md</code> — personal preferences, all projects</div>
-      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #00d4ff; font-size: 0.7rem;">settings.json</code> — global permission rules</div>
-      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #00d4ff; font-size: 0.7rem;">commands/</code> — your personal slash commands</div>
-      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #00d4ff; font-size: 0.7rem;">memory/</code> — auto-memory across sessions</div>
+<div style="display: flex; gap: 1.5rem; margin-top: 0.4rem;">
+  <div style="flex: 1;">
+    <div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: #00d4ff; margin-bottom: 0.5rem;">~/.claude/ <span style="color: #8b949e; text-transform: none; letter-spacing: 0;">— your home directory</span></div>
+    <div style="display: flex; gap: 0.35rem; margin-bottom: 0.4rem;">
+      <div style="flex: 1; background: #161b22; border: 1px solid rgba(0, 212, 255, 0.25); border-radius: 6px; padding: 0.35rem 0.5rem;">
+        <div style="font-size: 0.55rem; color: #00d4ff;">CLAUDE.md</div>
+        <div style="font-size: 0.5rem; color: #8b949e;">personal prefs</div>
+      </div>
+      <div style="flex: 1; background: #161b22; border: 1px solid rgba(0, 212, 255, 0.25); border-radius: 6px; padding: 0.35rem 0.5rem;">
+        <div style="font-size: 0.55rem; color: #00d4ff;">settings.json</div>
+        <div style="font-size: 0.5rem; color: #8b949e;">global permissions</div>
+      </div>
     </div>
-    <div style="margin-top: 0.6rem; font-size: 0.65rem; color: #8b949e;">Just you. Not checked in. Follows you across projects.</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.3rem;">
+      <div style="background: rgba(0, 212, 255, 0.08); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 5px; padding: 0.3rem 0.45rem;">
+        <div style="font-size: 0.5rem; color: #8b949e; margin-bottom: 0.1rem;">&#128193;</div>
+        <div style="font-size: 0.55rem; color: #00d4ff; font-weight: 600;">commands/</div>
+        <div style="font-size: 0.45rem; color: #8b949e;">slash commands</div>
+      </div>
+      <div style="background: rgba(0, 212, 255, 0.08); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 5px; padding: 0.3rem 0.45rem;">
+        <div style="font-size: 0.5rem; color: #8b949e; margin-bottom: 0.1rem;">&#128193;</div>
+        <div style="font-size: 0.55rem; color: #00d4ff; font-weight: 600;">rules/</div>
+        <div style="font-size: 0.45rem; color: #8b949e;">personal rules</div>
+      </div>
+      <div style="background: rgba(0, 212, 255, 0.08); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 5px; padding: 0.3rem 0.45rem;">
+        <div style="font-size: 0.5rem; color: #8b949e; margin-bottom: 0.1rem;">&#128193;</div>
+        <div style="font-size: 0.55rem; color: #00d4ff; font-weight: 600;">skills/</div>
+        <div style="font-size: 0.45rem; color: #8b949e;">personal skills</div>
+      </div>
+      <div style="background: rgba(0, 212, 255, 0.08); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 5px; padding: 0.3rem 0.45rem;">
+        <div style="font-size: 0.5rem; color: #8b949e; margin-bottom: 0.1rem;">&#128193;</div>
+        <div style="font-size: 0.55rem; color: #00d4ff; font-weight: 600;">agents/</div>
+        <div style="font-size: 0.45rem; color: #8b949e;">custom subagents</div>
+      </div>
+      <div style="background: rgba(0, 212, 255, 0.08); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 5px; padding: 0.3rem 0.45rem;">
+        <div style="font-size: 0.5rem; color: #8b949e; margin-bottom: 0.1rem;">&#128193;</div>
+        <div style="font-size: 0.55rem; color: #00d4ff; font-weight: 600;">hooks/</div>
+        <div style="font-size: 0.45rem; color: #8b949e;">automation</div>
+      </div>
+      <div style="background: rgba(0, 212, 255, 0.08); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 5px; padding: 0.3rem 0.45rem;">
+        <div style="font-size: 0.5rem; color: #8b949e; margin-bottom: 0.1rem;">&#128193;</div>
+        <div style="font-size: 0.55rem; color: #00d4ff; font-weight: 600;">memory/</div>
+        <div style="font-size: 0.45rem; color: #8b949e;">cross-session</div>
+      </div>
+    </div>
+    <div style="margin-top: 0.4rem; font-size: 0.55rem; color: #8b949e;">Just you. Not checked in. Follows you across projects.</div>
   </div>
 
-  <div style="flex: 1; border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 10px; padding: 1rem 1.25rem; background: rgba(124, 58, 237, 0.05);">
-    <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #7c3aed; margin-bottom: 0.75rem;">your-project/ <span style="color: #8b949e; text-transform: none; letter-spacing: 0;">— checked into git</span></div>
-    <div style="display: flex; flex-direction: column; gap: 0.4rem;">
-      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #a78bfa; font-size: 0.7rem;">CLAUDE.md</code> — team standards, shared context</div>
-      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #a78bfa; font-size: 0.7rem;">.claude/settings.json</code> — project permission rules</div>
-      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #a78bfa; font-size: 0.7rem;">.claude/commands/</code> — team slash commands</div>
-      <div style="font-size: 0.8rem; color: #e6edf3;"><code style="color: #a78bfa; font-size: 0.7rem;">CLAUDE.local.md</code> — personal overrides <span style="font-size: 0.65rem; color: #8b949e;">(gitignored)</span></div>
+  <div style="flex: 1;">
+    <div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: #7c3aed; margin-bottom: 0.5rem;">your-project/ <span style="color: #8b949e; text-transform: none; letter-spacing: 0;">— checked into git</span></div>
+    <div style="display: flex; gap: 0.35rem; margin-bottom: 0.4rem;">
+      <div style="flex: 1; background: #161b22; border: 1px solid rgba(124, 58, 237, 0.25); border-radius: 6px; padding: 0.35rem 0.5rem;">
+        <div style="font-size: 0.55rem; color: #a78bfa;">CLAUDE.md</div>
+        <div style="font-size: 0.5rem; color: #8b949e;">team standards</div>
+      </div>
+      <div style="flex: 1; background: #161b22; border: 1px solid rgba(124, 58, 237, 0.25); border-radius: 6px; padding: 0.35rem 0.5rem;">
+        <div style="font-size: 0.55rem; color: #a78bfa;">CLAUDE.local.md</div>
+        <div style="font-size: 0.5rem; color: #8b949e;">personal <span style="color: #6b7280;">(gitignored)</span></div>
+      </div>
+      <div style="flex: 1; background: #161b22; border: 1px solid rgba(124, 58, 237, 0.25); border-radius: 6px; padding: 0.35rem 0.5rem;">
+        <div style="font-size: 0.55rem; color: #a78bfa;">.mcp.json</div>
+        <div style="font-size: 0.5rem; color: #8b949e;">MCP servers</div>
+      </div>
     </div>
-    <div style="margin-top: 0.6rem; font-size: 0.65rem; color: #8b949e;">Shared with your team. Evolves with the codebase.</div>
+    <div style="border: 1px solid rgba(124, 58, 237, 0.25); border-radius: 7px; padding: 0.4rem; background: rgba(124, 58, 237, 0.04);">
+      <div style="font-size: 0.55rem; color: #7c3aed; font-weight: 600; margin-bottom: 0.3rem; padding-left: 0.1rem;">&#128193; .claude/</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem;">
+        <div style="background: #161b22; border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 5px; padding: 0.3rem 0.45rem;">
+          <div style="font-size: 0.55rem; color: #a78bfa; font-weight: 600;">settings.json</div>
+          <div style="font-size: 0.45rem; color: #8b949e;">project permissions</div>
+        </div>
+        <div style="background: #161b22; border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 5px; padding: 0.3rem 0.45rem;">
+          <div style="font-size: 0.55rem; color: #a78bfa; font-weight: 600;">settings.local.json</div>
+          <div style="font-size: 0.45rem; color: #8b949e;">local overrides</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.25rem; margin-top: 0.3rem;">
+        <div style="background: rgba(124, 58, 237, 0.08); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 5px; padding: 0.25rem 0.4rem;">
+          <div style="font-size: 0.5rem; color: #8b949e; margin-bottom: 0.05rem;">&#128193;</div>
+          <div style="font-size: 0.5rem; color: #a78bfa; font-weight: 600;">commands/</div>
+        </div>
+        <div style="background: rgba(124, 58, 237, 0.08); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 5px; padding: 0.25rem 0.4rem;">
+          <div style="font-size: 0.5rem; color: #8b949e; margin-bottom: 0.05rem;">&#128193;</div>
+          <div style="font-size: 0.5rem; color: #a78bfa; font-weight: 600;">rules/</div>
+        </div>
+        <div style="background: rgba(124, 58, 237, 0.08); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 5px; padding: 0.25rem 0.4rem;">
+          <div style="font-size: 0.5rem; color: #8b949e; margin-bottom: 0.05rem;">&#128193;</div>
+          <div style="font-size: 0.5rem; color: #a78bfa; font-weight: 600;">skills/</div>
+        </div>
+        <div style="background: rgba(124, 58, 237, 0.08); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 5px; padding: 0.25rem 0.4rem;">
+          <div style="font-size: 0.5rem; color: #8b949e; margin-bottom: 0.05rem;">&#128193;</div>
+          <div style="font-size: 0.5rem; color: #a78bfa; font-weight: 600;">agents/</div>
+        </div>
+        <div style="background: rgba(124, 58, 237, 0.08); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 5px; padding: 0.25rem 0.4rem;">
+          <div style="font-size: 0.5rem; color: #8b949e; margin-bottom: 0.05rem;">&#128193;</div>
+          <div style="font-size: 0.5rem; color: #a78bfa; font-weight: 600;">hooks/</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 0.4rem; font-size: 0.55rem; color: #8b949e;">Shared with your team. Evolves with the codebase.</div>
   </div>
 </div>
 
@@ -239,18 +317,59 @@ The things I wish I knew on day one
 
 ---
 
-# Essential Commands
+# Starting a Session
 
-<v-clicks>
+<div style="display: flex; gap: 2rem; margin-top: 0.75rem;">
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 0.6rem;">
+    <v-clicks>
+      <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/init</code></strong> — analyzes your codebase, generates a starter CLAUDE.md. Run it first</div>
+      <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong>Plan mode</strong> (<code style="color: #00d4ff;">Shift+Tab</code> twice) — writes plans to special plan files that survive compaction. Removes write tools entirely so the agent can't make edits — pure thinking</div>
+      <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/clear</code></strong> — flush context between unrelated tasks. "The single most underused command"</div>
+    </v-clicks>
+  </div>
+  <div style="flex: 1;">
+    <TerminalBlock title="first session">
+      <div style="font-size: 0.75rem; line-height: 1.8;">
+        <span style="color: #8b949e;">$</span> <span style="color: #e6edf3;">cd my-project && claude</span><br/>
+        <span style="color: #e6edf3;">> /init</span><br/>
+        <span style="color: #8b949e;">⠋ Analyzing codebase...</span><br/>
+        <span style="color: #4ade80;">✓ Generated CLAUDE.md (142 lines)</span><br/>
+        <span style="color: #e6edf3;">> Shift+Tab → Plan Mode</span>
+      </div>
+    </TerminalBlock>
+  </div>
+</div>
 
-- **`/init`** — analyzes your codebase, generates a starter CLAUDE.md. Run it first
-- **Plan mode** (`Shift+Tab` twice) — read-only research and planning. Start here for non-trivial tasks
-- **`/clear`** — flush context between unrelated tasks. "The single most underused command"
-- **`/compact`** — compress conversation when context grows. Add focus: `/compact Focus on the API changes`
-- **`@`** — reference files directly in prompts. `@src/auth.ts` beats describing where code lives
-- **Subagents** — isolated sub-sessions for investigation. Keeps your main context clean
+---
 
-</v-clicks>
+# Working Smart
+
+<div style="display: flex; gap: 2rem; margin-top: 0.75rem;">
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 0.6rem;">
+    <v-clicks>
+      <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">@</code></strong> — add a specific file to context directly. Handy when you know exactly which file the agent needs to see</div>
+      <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/compact</code></strong> — compress conversation to free up context. Add focus: <code style="color: #a78bfa;">/compact Focus on the API changes</code></div>
+      <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong>Subagents</strong> — isolated sub-sessions for investigation and implementation. Keeps your main context clean</div>
+    </v-clicks>
+  </div>
+  <div style="flex: 1;">
+    <TerminalBlock title="during work">
+      <div style="font-size: 0.75rem; line-height: 1.8;">
+        <span style="color: #e6edf3;">> @src/auth.ts explain the token</span><br/>
+        <span style="color: #e6edf3;">  refresh logic</span><br/>
+        <br/>
+        <span style="color: #e6edf3;">> /compact Focus on the API changes</span><br/>
+        <br/>
+        <span style="color: #e6edf3;">> Use a subagent to implement the</span><br/>
+        <span style="color: #e6edf3;">  validation layer</span>
+      </div>
+    </TerminalBlock>
+  </div>
+</div>
+
+<!--
+/compact is less critical now that everyone has 1M context window tokens. Still useful for long sessions but don't stress about it — mention as a "good to know" not a "must do."
+-->
 
 ---
 
@@ -298,22 +417,26 @@ The one thing every source agrees on
   </div>
 
   <div style="flex: 1;">
-    <div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: #8b949e; margin-bottom: 0.5rem;">The feedback loop in action:</div>
-    <div style="background: #161b22; border-radius: 8px; padding: 0.7rem 0.9rem; border-left: 3px solid #00d4ff; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; line-height: 1.8;">
-      <div style="color: #8b949e;">⠋ Writing tests...</div>
-      <div style="color: #e6edf3;">$ npm test</div>
-      <div style="color: #f87171;">✗ 3 failing</div>
-      <div style="color: #8b949e; margin-top: 0.3rem;">⠋ Implementing...</div>
-      <div style="color: #e6edf3;">$ npm test</div>
-      <div style="color: #4ade80;">✓ 3 passing</div>
-      <div style="color: #8b949e; margin-top: 0.3rem;">⠋ Checking the page...</div>
-      <div style="color: #e6edf3;">$ browser screenshot localhost:3000</div>
-      <div style="color: #e6edf3;">📸 Form renders, but submit button is</div>
-      <div style="color: #e6edf3;">   clipped below the fold</div>
-      <div style="color: #8b949e; margin-top: 0.3rem;">⠋ Fixing layout...</div>
-      <div style="color: #e6edf3;">$ browser screenshot localhost:3000</div>
-      <div style="color: #4ade80;">✓ Form visible, button accessible</div>
-    </div>
+    <TerminalBlock title="the feedback loop in action">
+      <div style="font-size: 0.65rem; line-height: 1.8;">
+        <span style="color: #8b949e;">⠋ Writing tests...</span><br/>
+        <span style="color: #e6edf3;">$ npm test</span><br/>
+        <span style="color: #f87171;">✗ 3 failing</span><br/>
+        <br/>
+        <span style="color: #8b949e;">⠋ Implementing...</span><br/>
+        <span style="color: #e6edf3;">$ npm test</span><br/>
+        <span style="color: #4ade80;">✓ 3 passing</span><br/>
+        <br/>
+        <span style="color: #8b949e;">⠋ Checking the page...</span><br/>
+        <span style="color: #e6edf3;">$ browser screenshot localhost:3000</span><br/>
+        <span style="color: #e6edf3;">📸 Form renders, but submit button is</span><br/>
+        <span style="color: #e6edf3;">   clipped below the fold</span><br/>
+        <br/>
+        <span style="color: #8b949e;">⠋ Fixing layout...</span><br/>
+        <span style="color: #e6edf3;">$ browser screenshot localhost:3000</span><br/>
+        <span style="color: #4ade80;">✓ Form visible, button accessible</span>
+      </div>
+    </TerminalBlock>
   </div>
 </div>
 
