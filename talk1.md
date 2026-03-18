@@ -441,11 +441,11 @@ The things I wish I knew on day one
   <div style="flex: 1;">
     <TerminalBlock title="first session">
       <div style="font-size: 0.75rem; line-height: 1.8;">
-        <span style="color: #00d4ff;">&#9998; you</span> <span style="color: #e6edf3;">cd my-project && claude</span><br/>
-        <span style="color: #00d4ff;">&#9998; you</span> <span style="color: #e6edf3;">/init</span><br/>
-        <span style="color: #a78bfa;">&#9881; claude</span> <span style="color: #8b949e;">Analyzing codebase...</span><br/>
-        <span style="color: #a78bfa;">&#9881; claude</span> <span style="color: #4ade80;">✓ Generated CLAUDE.md (142 lines)</span><br/>
-        <span style="color: #00d4ff;">&#9998; you</span> <span style="color: #e6edf3;">Shift+Tab → Plan Mode</span>
+        <TermYou text="cd my-project && claude" /><br/>
+        <TermYou text="/init" /><br/>
+        <TermClaude text="Analyzing codebase..." /><br/>
+        <TermClaude><span style="color: #4ade80;">✓ Generated CLAUDE.md (142 lines)</span></TermClaude><br/>
+        <TermYou text="Shift+Tab → Plan Mode" />
       </div>
     </TerminalBlock>
   </div>
@@ -474,12 +474,12 @@ Plan mode: Removes all write tools so the agent literally can't make edits. Pure
   <div style="flex: 1;">
     <TerminalBlock title="during work">
       <div style="font-size: 0.75rem; line-height: 1.8;">
-        <span style="color: #00d4ff;">&#9998; you</span> <span style="color: #e6edf3;">@src/auth.ts explain the token</span><br/>
+        <TermYou text="@src/auth.ts explain the token" /><br/>
         <span style="color: #e6edf3;">  refresh logic</span><br/>
         <br/>
-        <span style="color: #00d4ff;">&#9998; you</span> <span style="color: #e6edf3;">/compact Focus on the API changes</span><br/>
+        <TermYou text="/compact Focus on the API changes" /><br/>
         <br/>
-        <span style="color: #00d4ff;">&#9998; you</span> <span style="color: #e6edf3;">Use a subagent to implement the</span><br/>
+        <TermYou text="Use a subagent to implement the" /><br/>
         <span style="color: #e6edf3;">  validation layer</span>
       </div>
     </TerminalBlock>
@@ -550,12 +550,12 @@ The one thing every source agrees on
   <div style="flex: 1;">
     <TerminalBlock title="the feedback loop">
       <div style="font-size: 0.65rem; line-height: 1.8;">
-        <span style="color: #a78bfa;">&#9881; claude</span> <span style="color: #8b949e;">Writing tests...</span><br/>
-        <span style="color: #a78bfa;">&#9881; claude</span> <span style="color: #e6edf3;">npm test</span><br/>
+        <TermClaude text="Writing tests..." /><br/>
+        <TermClaude text="npm test" /><br/>
         <span style="color: #f87171;">✗ 3 failing</span><br/>
         <br/>
-        <span style="color: #a78bfa;">&#9881; claude</span> <span style="color: #8b949e;">Implementing...</span><br/>
-        <span style="color: #a78bfa;">&#9881; claude</span> <span style="color: #e6edf3;">npm test</span><br/>
+        <TermClaude text="Implementing..." /><br/>
+        <TermClaude text="npm test" /><br/>
         <span style="color: #4ade80;">✓ 3 passing</span><br/>
       </div>
     </TerminalBlock>
