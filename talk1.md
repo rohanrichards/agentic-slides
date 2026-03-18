@@ -435,6 +435,7 @@ Plan mode: Removes all write tools so the agent literally can't make edits. Pure
     <div v-click="1" style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">@</code></strong> — add a specific file to context directly</div>
     <div v-click="3" style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/compact</code></strong> — compress conversation to free up context</div>
     <div v-click="5" style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong>Subagents</strong> — isolated sub-sessions that keep your main context clean</div>
+    <div v-click="7" style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/effort high</code></strong> — slower, deeper reasoning. Fewer mistakes to fix later</div>
   </div>
   <div style="flex: 1;">
     <TerminalBlock title="during work">
@@ -450,6 +451,9 @@ Plan mode: Removes all write tools so the agent literally can't make edits. Pure
           <UserInput text="Use a subagent to implement the" /><br/>
           <span style="color: #e6edf3;">  validation layer</span>
         </div>
+        <div v-click="8">
+          <UserInput text="/effort high" />
+        </div>
       </div>
     </TerminalBlock>
   </div>
@@ -461,6 +465,8 @@ Plan mode: Removes all write tools so the agent literally can't make edits. Pure
 /compact: Less critical now with the 1M context window. Still useful for very long sessions. Add focus to tell it what to preserve: /compact Focus on the API changes.
 
 Subagents: The agent can spawn isolated sub-sessions to investigate or implement without polluting your main conversation. The subagent does the work and reports back.
+
+/effort: Controls how hard Claude thinks. Options are low, medium, high, max. Default is medium. The instinct is to want fast responses, but a 30-second think that gets it right beats a 5-second answer you spend 20 minutes fixing. Time saved on speed is lost debugging bad output. Set it to high for anything non-trivial. You can also set it permanently in settings.json.
 -->
 
 ---
