@@ -154,10 +154,10 @@ Everything the agent knows lives in one window. Here's what fills it:
 </v-clicks>
 
 <!--
-Token counts (for reference, don't show on slide):
-- System prompt: ~2,600 tokens
-- Tool definitions: ~17,600 tokens
-- These numbers shift between versions
+Token counts vary by setup (for reference, don't show on slide):
+- System prompt: ~2,600 tokens (fixed)
+- Tool definitions: varies — base Claude Code tools are ~9K, but MCP servers, skills, and custom commands add more. A fully loaded setup can be 17K+
+- These numbers shift between versions and configurations
 
 The key takeaway for the audience: there's a budget. The more stuff in the window, the worse the agent performs. This is why /clear and /compact exist — context hygiene matters.
 
