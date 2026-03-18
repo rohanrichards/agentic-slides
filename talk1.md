@@ -432,20 +432,30 @@ The things I wish I knew on day one
 
 <div style="display: flex; gap: 2rem; margin-top: 0.75rem;">
   <div style="flex: 1; display: flex; flex-direction: column; gap: 0.6rem;">
-    <v-clicks>
-      <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/init</code></strong> — generates a starter CLAUDE.md for your project</div>
-      <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong>Plan mode</strong> (<code style="color: #00d4ff;">Shift+Tab</code> twice) — read-only thinking, no edits</div>
-      <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/clear</code></strong> — flush context between tasks</div>
-    </v-clicks>
+    <v-click at="1">
+    <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/init</code></strong> — generates a starter CLAUDE.md for your project</div>
+    </v-click>
+    <v-click at="3">
+    <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong>Plan mode</strong> (<code style="color: #00d4ff;">Shift+Tab</code> twice) — read-only thinking, no edits</div>
+    </v-click>
+    <v-click at="4">
+    <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/clear</code></strong> — flush context between tasks</div>
+    </v-click>
   </div>
   <div style="flex: 1;">
     <TerminalBlock title="first session">
       <div style="font-size: 0.75rem; line-height: 1.8;">
-        <TermYou text="cd my-project && claude" /><br/>
-        <TermYou text="/init" /><br/>
-        <TermClaude text="Analyzing codebase..." /><br/>
-        <TermClaude><span style="color: #4ade80;">✓ Generated CLAUDE.md (142 lines)</span></TermClaude><br/>
-        <TermYou text="Shift+Tab → Plan Mode" />
+        <v-click at="1">
+        <UserInput text="cd my-project && claude" /><br/>
+        <UserInput text="/init" /><br/>
+        </v-click>
+        <v-click at="2">
+        <ClaudeOutput text="Analyzing codebase..." /><br/>
+        <ClaudeOutput><span style="color: #4ade80;">✓ Generated CLAUDE.md (142 lines)</span></ClaudeOutput><br/>
+        </v-click>
+        <v-click at="3">
+        <UserInput text="Shift+Tab → Plan Mode" />
+        </v-click>
       </div>
     </TerminalBlock>
   </div>
@@ -465,22 +475,32 @@ Plan mode: Removes all write tools so the agent literally can't make edits. Pure
 
 <div style="display: flex; gap: 2rem; margin-top: 0.75rem;">
   <div style="flex: 1; display: flex; flex-direction: column; gap: 0.6rem;">
-    <v-clicks>
-      <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">@</code></strong> — add a specific file to context directly</div>
-      <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/compact</code></strong> — compress conversation to free up context</div>
-      <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong>Subagents</strong> — isolated sub-sessions that keep your main context clean</div>
-    </v-clicks>
+    <v-click at="1">
+    <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">@</code></strong> — add a specific file to context directly</div>
+    </v-click>
+    <v-click at="2">
+    <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/compact</code></strong> — compress conversation to free up context</div>
+    </v-click>
+    <v-click at="3">
+    <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong>Subagents</strong> — isolated sub-sessions that keep your main context clean</div>
+    </v-click>
   </div>
   <div style="flex: 1;">
     <TerminalBlock title="during work">
       <div style="font-size: 0.75rem; line-height: 1.8;">
-        <TermYou text="@src/auth.ts explain the token" /><br/>
+        <v-click at="1">
+        <UserInput text="@src/auth.ts explain the token" /><br/>
         <span style="color: #e6edf3;">  refresh logic</span><br/>
+        </v-click>
+        <v-click at="2">
         <br/>
-        <TermYou text="/compact Focus on the API changes" /><br/>
+        <UserInput text="/compact Focus on the API changes" /><br/>
+        </v-click>
+        <v-click at="3">
         <br/>
-        <TermYou text="Use a subagent to implement the" /><br/>
+        <UserInput text="Use a subagent to implement the" /><br/>
         <span style="color: #e6edf3;">  validation layer</span>
+        </v-click>
       </div>
     </TerminalBlock>
   </div>
@@ -539,30 +559,38 @@ The one thing every source agrees on
 
 # Give Claude a Way to Verify Its Work
 
-<v-clicks>
-
 <div style="display: flex; gap: 2rem; margin-top: 0.5rem;">
   <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
+    <v-click at="1">
     <div style="font-size: 1rem; color: #e6edf3; line-height: 1.7;">Anthropic's single biggest quality multiplier.</div>
+    </v-click>
+    <v-click at="3">
     <div style="font-size: 0.9rem; color: #8b949e; line-height: 1.7;">Without verification, <strong style="color: #e6edf3;">"the tests pass"</strong> is a prediction, not a report.</div>
+    </v-click>
   </div>
 
   <div style="flex: 1;">
     <TerminalBlock title="the feedback loop">
       <div style="font-size: 0.65rem; line-height: 1.8;">
-        <TermClaude text="Writing tests..." /><br/>
-        <TermClaude text="npm test" /><br/>
+        <v-click at="1">
+        <ClaudeOutput text="Writing tests..." /><br/>
+        <ClaudeOutput text="npm test" /><br/>
+        </v-click>
+        <v-click at="2">
         <span style="color: #f87171;">✗ 3 failing</span><br/>
+        </v-click>
+        <v-click at="3">
         <br/>
-        <TermClaude text="Implementing..." /><br/>
-        <TermClaude text="npm test" /><br/>
+        <ClaudeOutput text="Implementing..." /><br/>
+        <ClaudeOutput text="npm test" /><br/>
+        </v-click>
+        <v-click at="4">
         <span style="color: #4ade80;">✓ 3 passing</span><br/>
+        </v-click>
       </div>
     </TerminalBlock>
   </div>
 </div>
-
-</v-clicks>
 
 <!--
 Every source we researched agrees: verification is the single highest-leverage practice.
