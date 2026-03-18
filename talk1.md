@@ -432,30 +432,24 @@ The things I wish I knew on day one
 
 <div style="display: flex; gap: 2rem; margin-top: 0.75rem;">
   <div style="flex: 1; display: flex; flex-direction: column; gap: 0.6rem;">
-    <v-click at="1">
-    <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/init</code></strong> — generates a starter CLAUDE.md for your project</div>
-    </v-click>
-    <v-click at="3">
-    <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong>Plan mode</strong> (<code style="color: #00d4ff;">Shift+Tab</code> twice) — read-only thinking, no edits</div>
-    </v-click>
-    <v-click at="4">
-    <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/clear</code></strong> — flush context between tasks</div>
-    </v-click>
+    <div v-click="1" style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/init</code></strong> — generates a starter CLAUDE.md for your project</div>
+    <div v-click="4" style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong>Plan mode</strong> (<code style="color: #00d4ff;">Shift+Tab</code> twice) — read-only thinking, no edits</div>
+    <div v-click="6" style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/clear</code></strong> — flush context between tasks</div>
   </div>
   <div style="flex: 1;">
     <TerminalBlock title="first session">
       <div style="font-size: 0.75rem; line-height: 1.8;">
-        <v-click at="1">
-        <UserInput text="cd my-project && claude" /><br/>
-        <UserInput text="/init" /><br/>
-        </v-click>
-        <v-click at="2">
-        <ClaudeOutput text="Analyzing codebase..." /><br/>
-        <ClaudeOutput><span style="color: #4ade80;">✓ Generated CLAUDE.md (142 lines)</span></ClaudeOutput><br/>
-        </v-click>
-        <v-click at="3">
-        <UserInput text="Shift+Tab → Plan Mode" />
-        </v-click>
+        <div v-click="2">
+          <UserInput text="cd my-project && claude" /><br/>
+          <UserInput text="/init" />
+        </div>
+        <div v-click="3">
+          <ClaudeOutput text="Analyzing codebase..." /><br/>
+          <ClaudeOutput><span style="color: #4ade80;">✓ Generated CLAUDE.md (142 lines)</span></ClaudeOutput>
+        </div>
+        <div v-click="5">
+          <UserInput text="Shift+Tab → Plan Mode" />
+        </div>
       </div>
     </TerminalBlock>
   </div>
@@ -475,32 +469,24 @@ Plan mode: Removes all write tools so the agent literally can't make edits. Pure
 
 <div style="display: flex; gap: 2rem; margin-top: 0.75rem;">
   <div style="flex: 1; display: flex; flex-direction: column; gap: 0.6rem;">
-    <v-click at="1">
-    <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">@</code></strong> — add a specific file to context directly</div>
-    </v-click>
-    <v-click at="2">
-    <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/compact</code></strong> — compress conversation to free up context</div>
-    </v-click>
-    <v-click at="3">
-    <div style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong>Subagents</strong> — isolated sub-sessions that keep your main context clean</div>
-    </v-click>
+    <div v-click="1" style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">@</code></strong> — add a specific file to context directly</div>
+    <div v-click="3" style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong><code style="color: #00d4ff;">/compact</code></strong> — compress conversation to free up context</div>
+    <div v-click="5" style="font-size: 0.9rem; color: #e6edf3; line-height: 1.6;"><strong>Subagents</strong> — isolated sub-sessions that keep your main context clean</div>
   </div>
   <div style="flex: 1;">
     <TerminalBlock title="during work">
       <div style="font-size: 0.75rem; line-height: 1.8;">
-        <v-click at="1">
-        <UserInput text="@src/auth.ts explain the token" /><br/>
-        <span style="color: #e6edf3;">  refresh logic</span><br/>
-        </v-click>
-        <v-click at="2">
-        <br/>
-        <UserInput text="/compact Focus on the API changes" /><br/>
-        </v-click>
-        <v-click at="3">
-        <br/>
-        <UserInput text="Use a subagent to implement the" /><br/>
-        <span style="color: #e6edf3;">  validation layer</span>
-        </v-click>
+        <div v-click="2">
+          <UserInput text="@src/auth.ts explain the token" /><br/>
+          <span style="color: #e6edf3;">  refresh logic</span>
+        </div>
+        <div v-click="4">
+          <UserInput text="/compact Focus on the API changes" />
+        </div>
+        <div v-click="6">
+          <UserInput text="Use a subagent to implement the" /><br/>
+          <span style="color: #e6edf3;">  validation layer</span>
+        </div>
       </div>
     </TerminalBlock>
   </div>
@@ -547,6 +533,14 @@ Subagents: The agent can spawn isolated sub-sessions to investigate or implement
 <div style="margin-top: 1rem; font-size: 0.95rem;">Start most sessions in <strong style="color: #00d4ff;">Plan Mode</strong>. Iterate on the plan. Then switch to execute.</div>
 </v-click>
 
+<!--
+Normal: default mode. Claude proposes an action, you approve or reject before it runs.
+Auto-Accept: Claude runs freely. Good for trusted tasks like running tests. Use with caution.
+Plan Mode: removes all write tools. Claude can only read and think. Plans go to special files that survive compaction.
+
+Recommendation: start in Plan Mode, iterate on the plan, then switch to Normal or Auto-Accept to execute.
+-->
+
 ---
 layout: section
 ---
@@ -561,32 +555,27 @@ The one thing every source agrees on
 
 <div style="display: flex; gap: 2rem; margin-top: 0.5rem;">
   <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
-    <v-click at="1">
-    <div style="font-size: 1rem; color: #e6edf3; line-height: 1.7;">Anthropic's single biggest quality multiplier.</div>
-    </v-click>
-    <v-click at="3">
-    <div style="font-size: 0.9rem; color: #8b949e; line-height: 1.7;">Without verification, <strong style="color: #e6edf3;">"the tests pass"</strong> is a prediction, not a report.</div>
-    </v-click>
+    <div v-click="1" style="font-size: 1rem; color: #e6edf3; line-height: 1.7;">Anthropic's single biggest quality multiplier.</div>
+    <div v-click="5" style="font-size: 0.9rem; color: #8b949e; line-height: 1.7;">Without verification, <strong style="color: #e6edf3;">"the tests pass"</strong> is a prediction, not a report.</div>
   </div>
 
   <div style="flex: 1;">
     <TerminalBlock title="the feedback loop">
       <div style="font-size: 0.65rem; line-height: 1.8;">
-        <v-click at="1">
-        <ClaudeOutput text="Writing tests..." /><br/>
-        <ClaudeOutput text="npm test" /><br/>
-        </v-click>
-        <v-click at="2">
-        <span style="color: #f87171;">✗ 3 failing</span><br/>
-        </v-click>
-        <v-click at="3">
-        <br/>
-        <ClaudeOutput text="Implementing..." /><br/>
-        <ClaudeOutput text="npm test" /><br/>
-        </v-click>
-        <v-click at="4">
-        <span style="color: #4ade80;">✓ 3 passing</span><br/>
-        </v-click>
+        <div v-click="2">
+          <ClaudeOutput text="Writing tests..." /><br/>
+          <ClaudeOutput text="npm test" />
+        </div>
+        <div v-click="3">
+          <span style="color: #f87171;">✗ 3 failing</span>
+        </div>
+        <div v-click="4">
+          <ClaudeOutput text="Implementing..." /><br/>
+          <ClaudeOutput text="npm test" />
+        </div>
+        <div v-click="5">
+          <span style="color: #4ade80;">✓ 3 passing</span>
+        </div>
       </div>
     </TerminalBlock>
   </div>
